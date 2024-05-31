@@ -1,15 +1,30 @@
-"use client"
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { FaFacebook, FaGoogle, FaTwitter, FaRegEnvelope,FaRegUser } from 'react-icons/fa';
+import { FaFacebook, FaGoogle, FaTwitter, FaRegEnvelope, FaRegUser } from 'react-icons/fa';
 import { MdLockOutline } from 'react-icons/md';
+import { login, register } from '../../features/authSlice';
+import { useAppDispatch } from '../../hooks/hooks';
 
 const LoginPage = () => {
+  const dispatch = useAppDispatch();
   const [isSignUp, setIsSignUp] = useState(false);
+  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const toggleSignUp = () => {
     setIsSignUp(!isSignUp);
+  };
+
+  const handleLogin = () => {
+    dispatch(login({ email, password }));
+  };
+
+  const handleRegister = () => {
+    dispatch(register({ email, username, password }));
   };
 
   return (
@@ -43,17 +58,17 @@ const LoginPage = () => {
               <div className="flex flex-col items-center">
                 <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                   <FaRegEnvelope className="text-gray-500 m-2" />
-                  <input type="email" name="email" placeholder="Email" className="bg-gray-100 outline-none text-sm flex-1" />
+                  <input type="email" name="email" placeholder="Email" className="bg-gray-100 outline-none text-sm flex-1" value={email} onChange={(e) => setEmail(e.target.value)} />
                 </div>
                 {isSignUp && (
                   <div className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                     <FaRegUser className="text-gray-500 m-2" />
-                    <input type="text" name="username" placeholder="Username" className="bg-gray-100 outline-none text-sm flex-1" />
+                    <input type="text" name="username" placeholder="Username" className="bg-gray-100 outline-none text-sm flex-1" value={username} onChange={(e) => setUsername(e.target.value)} />
                   </div>
                 )}
                 <div className="bg-gray-100 w-64 p-2 flex items-center">
                   <MdLockOutline className="text-gray-500 m-2" />
-                  <input type="password" name="password" placeholder="Password" className="bg-gray-100 outline-none text-sm flex-1" />
+                  <input type="password" name="password" placeholder="Password" className="bg-gray-100 outline-none text-sm flex-1" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 {!isSignUp && (
                   <div className="flex w-64 mb-5 justify-between mt-2">
@@ -65,9 +80,9 @@ const LoginPage = () => {
                     </a>
                   </div>
                 )}
-                <a href="#" className="border-2 border-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white mt-4">
+                <button onClick={isSignUp ? handleRegister : handleLogin} className="border-2 border-green-500 rounded-full px-12 py-2 inline-block font-semibold hover:bg-green-500 hover:text-white mt-4">
                   {isSignUp ? 'Sign Up' : 'Sign In'}
-                </a>
+                </button>
               </div>
             </div>
           </div>
@@ -80,10 +95,7 @@ const LoginPage = () => {
                 ? 'To keep connected with us please login with your personal info'
                 : 'Fill up personal information and start your journey'}
             </p>
-            <button
-              onClick={toggleSignUp}
-              className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500"
-            >
+            <button onClick={toggleSignUp} className="border-2 border-white rounded-full px-12 py-2 inline-block font-semibold hover:bg-white hover:text-green-500">
               {isSignUp ? 'Sign In' : 'Sign Up'}
             </button>
           </div>

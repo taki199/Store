@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.slick-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .scrollbar-hide::-webkit-scrollbar{
     display: none;
 
@@ -9,3 +18,33 @@
 .scrollbar-hide{
     scrollbar-width: none;
 }
+
+/* Add this CSS in your global stylesheet or a module CSS file */
+.category-list-wrapper .slick-slider {
+    overflow: hidden; /* Hide scrollbar */
+  }
+  
+  .category-list-wrapper .slick-list {
+    margin: 0 -15px; /* Adjust as needed */
+    padding: 0 15px;  /* Adjust as needed */
+  }
+  
+  .category-list-wrapper .slick-track {
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Custom styling to make the design more professional */
+  .category-list-wrapper .slick-slide {
+    padding: 0 10px; /* Adjust as needed */
+  }
+  
+  .category-list-wrapper .slick-prev, .category-list-wrapper .slick-next {
+    z-index: 1;
+    color: #000;
+  }
+  
+  .category-list-wrapper .slick-dots {
+    bottom: -30px; /* Adjust as needed to position the dots correctly */
+  }
+  

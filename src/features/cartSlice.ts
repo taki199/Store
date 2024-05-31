@@ -1,6 +1,7 @@
 // store/slices/cartSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Dish } from '../types/index';
+import { Dish } from '../types';
+import { loadState, saveState } from '../store/utils/localStorage';
 
 interface CartItem extends Dish {
   quantity: number;
@@ -11,14 +12,14 @@ interface CartState {
   total: number;
 }
 
-const initialState: CartState = {
+const initialState: CartState = loadState() || {
   items: [],
   total: 0,
 };
-const calculateTotal = (items: CartItem[]) => {
-    return items.reduce((total, item) => total + item.price * item.quantity, 0);
-  };
 
+const calculateTotal = (items: CartItem[]) => {
+  return items.reduce((total, item) => total + item.price * item.quantity, 0);
+};
 
 const cartSlice = createSlice({
   name: 'cart',

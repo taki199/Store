@@ -1,5 +1,5 @@
 import Filter from '@/components/Filter';
-import ProductList from '@/components/ProductList';
+import AllProducts from '../../components/AllProducts';
 import Image from 'next/image';
 import React from 'react';
 
@@ -21,10 +21,10 @@ const ListPage = () => {
         </div>
       </div>
       {/* Filter*/}
-      <Filter/>
+      <Filter />
        {/* Product List*/}
-       <h1 className='mt-12 text-xl font-semibold'>Dishes For You </h1>
-       <ProductList/>
+       <h1 className='mt-12 text-xl font-semibold'>Dishes For You</h1>
+       <AllProducts />
     </div>
   );
 };
