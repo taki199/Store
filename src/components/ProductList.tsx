@@ -1,20 +1,26 @@
-"use client"
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { fetchDishesByCategoryAsync } from '../features/categorySlice'; // Import fetchDishesByCategoryAsync from the category slice
+import { fetchDishesByCategoryAsync } from '../features/categorySlice';
 import { addToCart } from '../features/cartSlice';
+import { slugify } from '../store/utils/slugify'; // Import the slugify function
 
-const ProductList: React.FC<{ categoryId?: string; limit?: number }> = ({ categoryId, limit }) => {
+interface ProductListProps {
+  categoryId?: string;
+  limit?: number;
+}
+
+const ProductList: React.FC<ProductListProps> = ({ categoryId, limit }) => {
   const dispatch = useAppDispatch();
-  const dishes = useAppSelector((state) => state.category.dishesByCategory); // Access dishesByCategory state from the category slice
-  const isLoading = useAppSelector((state) => state.category.loading); // Access loading state from the category slice
+  const dishes = useAppSelector((state) => state.category.dishesByCategory);
+  const isLoading = useAppSelector((state) => state.category.loading);
 
   useEffect(() => {
     if (categoryId) {
-      dispatch(fetchDishesByCategoryAsync(categoryId)); // Dispatch fetchDishesByCategoryAsync with categoryId
-      console.log('dishes',dispatch)
+      dispatch(fetchDishesByCategoryAsync(categoryId));
     }
   }, [categoryId, dispatch]);
 
@@ -28,11 +34,11 @@ const ProductList: React.FC<{ categoryId?: string; limit?: number }> = ({ catego
     <div className='mt-12 flex gap-x-8 gap-y-16 justify-between flex-wrap'>
       {productsToShow.map((product) => (
         <div key={product._id} className='w-full flex flex-col gap-4 sm:w-[45%] lg:w-[22%]'>
-          <Link href={`/product/${product._id}`}>
+          <Link href={`/${slugify(product.name)}-${product._id}`}>
             <div className='relative w-full h-80'>
               {product.image && (
                 <Image
-                  src={product.image.url}
+                  src={product.image.url || '/product.png'}
                   alt={product.name}
                   fill
                   sizes='25vw'
@@ -40,7 +46,7 @@ const ProductList: React.FC<{ categoryId?: string; limit?: number }> = ({ catego
                 />
               )}
               <Image
-                src="https://cdn.pixabay.com/photo/2017/12/09/08/18/pizza-3007395_1280.jpg"
+                src={product.image.url || '/product.png'}
                 alt={product.name}
                 fill
                 sizes='25vw'

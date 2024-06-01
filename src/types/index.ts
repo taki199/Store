@@ -1,32 +1,33 @@
-// types.ts
+// types/index.ts
+
 export interface Dish {
+  _id: string;
+  name: string;
+  description: string;
+  price: number;
+  category: {
     _id: string;
     name: string;
-    description: string;
-    price: number;
-    category: {
-      _id: string;
-      name: string;
-    };
-    image: {
-      url: string;
-      publicId: string;
-    };
-    quantity:number;
-    stock: number;
-    tags: string[];
-    ingredients: string[];
-    ratings: any[];
-    relatedDishes: any[];
-    availabilitySchedule: {
-      startTime: string;
-      endTime: string;
-    };
-    isDeleted: boolean;
-    __v: number;
-  }
-  
-  // types.ts
+  };
+  image: {
+    url: string;
+    publicId: string;
+  };
+  quantity: number;
+  stock: number;
+  tags: string[];
+  ingredients: string[];
+  ratings: any[];
+  relatedDishes: any[];
+  availabilitySchedule: {
+    startTime: string;
+    endTime: string;
+  };
+  isDeleted: boolean;
+  __v: number;
+  slug: string;
+  id:string |null
+}
 
 export interface ProfilePhoto {
   url: string;
@@ -37,20 +38,12 @@ export interface User {
   _id: string;
   username: string;
   email: string;
-  profilePhoto: {
-    url: string;
-    publicId: string;
-  };
+  profilePhoto: ProfilePhoto;
   IsDeleted: boolean;
   isCustomer: boolean;
   createdAt: string;
   updatedAt: string;
   __v: number;
-}
-
-export interface Dish {
-  _id: string;
-  name: string;
 }
 
 export interface OrderItem {
@@ -80,4 +73,13 @@ export interface Order {
 export interface OrderResponse {
   message: string;
   orders: Order[];
+}
+
+export interface Category {
+  _id: string;
+  name: string;
+  image: {
+    url: string;
+    publicId: string;
+  };
 }

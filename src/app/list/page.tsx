@@ -1,12 +1,13 @@
 import Filter from '@/components/Filter';
-import AllProducts from '../../components/AllProducts';
+import CategoryList from '@/components/CategoryList';
+import DishList from '@/components/DishList';
 import Image from 'next/image';
 import React from 'react';
 
 const ListPage = () => {
   return (
     <div className="px-4 md:px-8 lg:px-16 xl:32 2xl:px-64 relative">
-      {/* campaign  */}
+      {/* campaign */}
       <div className="hidden bg-black px-4 sm:flex justify-between h-64">
         <div className="w-2/3 flex flex-col items-center justify-center gap-8">
           <h1 className="text-4xl font-semibold leading-[48px] text-white">
@@ -20,11 +21,13 @@ const ListPage = () => {
           <Image src="/woman.png" alt="" fill className="object-contain" />
         </div>
       </div>
-      {/* Filter*/}
+      {/* Filter */}
       <Filter />
-       {/* Product List*/}
-       <h1 className='mt-12 text-xl font-semibold'>Dishes For You</h1>
-       <AllProducts />
+      {/* Category List */}
+      {/* <CategoryList /> */}
+      {/* Dish List */}
+      <h1 className='mt-12 text-xl font-semibold'>Dishes For You</h1>
+      <DishList />
     </div>
   );
 };

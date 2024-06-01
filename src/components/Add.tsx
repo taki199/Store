@@ -1,6 +1,4 @@
-"use client"
-
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { addToCart } from '../features/cartSlice';
 import { RootState } from '../store';
@@ -21,7 +19,7 @@ const Add: React.FC<AddProps> = ({ productId }) => {
     return <div>Product not found</div>;
   }
 
-  const stockNumber = product.stock || 0;
+  const stockNumber = product.stock ?? 0; // Ensure stock is defined
 
   const handleQuantity = (type: "i" | "d") => {
     if (type === "d" && quantity > 1) {
